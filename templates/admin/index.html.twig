@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+	<section class="section" id="features">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="section-heading">
+						<h2>Admin :
+							<em>Interface</em>
+						</h2>
+						<br>
+						<a class="main-button" href="{{ path('admin_user') }}" role="button">Manage Users</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

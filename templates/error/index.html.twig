@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error{% endblock %}
+
+{% block body %}
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">There was
+                <em>an error</em>
+            </h2>
+            <div class="card-body text-center">
+                <p>{{ php_errormsg }}</p>
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <p>The requested page couldn't be located. <a href="{{ path('home') }}">Return to the homepage</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

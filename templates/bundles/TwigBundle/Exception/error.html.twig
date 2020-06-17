@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error
+{% endblock %}
+{% block body %}
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">An Error
+                <em>Occurred</em>
+            </h2>
+            <div class="container">
+                <div class="section-features">
+                    <div class="card-body">
+                        <p>The requested page couldn't be located. <a href="{{ path('home') }}">Return to the homepage</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

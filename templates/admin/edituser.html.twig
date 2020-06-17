@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme userForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}
+	Modify User
+{% endblock %}
+
+{% block body %}
+	<section class="section" id="features">
+		<div class="card section-heading">
+			<h2 class="card-header text-center text-uppercase py-4">Modify :
+				<em>User</em>
+			</h2>
+			<div class="container">
+				<div class="section-features">
+					<div class="card">
+						<div class="card-body">
+							{{ form_start(userForm) }}
+							{{ form_row(userForm.email) }}
+							{{ form_row(userForm.first_name) }}
+							{{ form_row(userForm.last_name) }}
+							<div class="form-group">
+								<label class="control-label required" for="{{ userForm.roles.vars.id }}">Roles</label>
+								<select id="{{ userForm.roles.vars.id }}" name="{{ userForm.roles.vars.full_name }}" class="form-control">
+									{% for choice in userForm.children.roles.vars.choices %}
+										<option value="{{ choice.value }}" {% if choice.value is same as (user.roles[0]) %}selected{% endif %}>{{ choice.label }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							{% do userForm.roles.setRendered() %}
+							{{ form_row(userForm.licence_number) }}
+							<div class="form-group">
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								<button class="main-button" role="button" type="submit">Submit</button>
+							</div>
+							{{ form_end(userForm) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
