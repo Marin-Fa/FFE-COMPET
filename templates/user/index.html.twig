@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your Profil
+{% endblock %}
+
+{% block body %}
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">User :
+                <em>Profil</em>
+            </h2>
+            <div class="container">
+                <div class="section-features">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Email :
+                                {{ user.email }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">First Name :
+                                {{ user.firstName }}</p>
+                            <p class="card-text">Last Name :
+                                {{ user.lastName }}</p>
+                            <p class="card-text">Licence Number :
+                                {{ user.licenceNumber }}</p>
+                            {% if is_granted('ROLE_ORGANIZER') %}
+                                <p class="card-text">Contests :
+                                    {{ user.contests | length }}</p>
+                            {% endif %}
+                            {% if is_granted('ROLE_RIDER') %}
+                                <p class="card-text">Horses :
+                                    {{ user.horses | length }}</p>
+                            {% endif %}
+                            <p class="card-text">ID :
+                                {{ user.id }}</p>
+                            <br>
+                            <div class="form-group">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <a class="main-button" href="{{ path('horse_add') }}" role="button">Add Horses</a>
+                                <a class="main-button" href="{{ path('user_horses', { 'id': user.id }) }}"
+                                   role="button">My Horses</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

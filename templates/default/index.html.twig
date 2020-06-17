@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block body %}
+	<section class="section" id="home_page_banner">
+	<div class="main-banner" id="top">
+		<video autoplay muted loop id="bg-video">
+			<source src="{{ absolute_url(asset('img/horse.mp4')) }}" type="video/mp4"/>
+		</video>
+
+		<div class="video-overlay header-text">
+			<div class="caption">
+				<h6>work harder, get stronger</h6>
+				<h2>find your
+					<em>competition</em>
+				</h2>
+				{% if not app.user %}
+					<div class="main-button scroll-to-section" id="home-button">
+						<a href="{{ path('app_register') }}">Become a member</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section" id="features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-heading" id="home-page">
+					<h2>Choose a
+						<em>Discipline</em>
+					</h2>
+					<p>
+						Equestrian Sports are sports that use horses as a main part of
+													                the sport. This usually takes the form of the rider being on the
+													                horse's back, or the horses pulling some sort of horse-drawn
+													                vehicle..
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<ul class="features-items">
+					<li class="feature-item">
+						<div class="left-icon">
+							<img src="{{ absolute_url(asset('img/jumping.png')) }}" alt="First One"/>
+						</div>
+						<div class="right-content">
+							<h4>Jumping</h4>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+																	                    do eiusmod tempor incididunt ut labore et dolore magna
+																	                    aliqua.
+							</p>
+							<a href="#" class="text-button">Discover More</a>
+						</div>
+					</li>
+					<li class="feature-item">
+						<div class="left-icon">
+							<img src="{{ absolute_url(asset('img/CCE.png')) }}" alt="second one"/>
+						</div>
+						<div class="right-content">
+							<h4>CCE</h4>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+																	                    do eiusmod tempor incididunt ut labore et dolore magna
+																	                    aliqua.
+							</p>
+							<a href="#" class="text-button">Discover More</a>
+						</div>
+					</li>
+					<li class="feature-item">
+						<div class="left-icon">
+							<img src="{{ absolute_url(asset('img/dressage.png')) }}" alt="third gym training"/>
+						</div>
+						<div class="right-content">
+							<h4>Dressage</h4>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+																	                    do eiusmod tempor incididunt ut labore et dolore magna
+																	                    aliqua.
+							</p>
+							<a href="#" class="text-button">Discover More</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-lg-6">
+				<ul class="features-items">
+					<li class="feature-item">
+						<div class="left-icon">
+							<img src="{{ absolute_url(asset('img/endurance.png')) }}" alt="fourth muscle"/>
+						</div>
+						<div class="right-content">
+							<h4>Endurance</h4>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+																	                    do eiusmod tempor incididunt ut labore et dolore magna
+																	                    aliqua.
+							</p>
+							<a href="#" class="text-button">Discover More</a>
+						</div>
+					</li>
+					<li class="feature-item">
+						<div class="left-icon">
+							<img src="{{ absolute_url(asset('img/horse-ball.png')) }}" alt="training fifth"/>
+						</div>
+						<div class="right-content">
+							<h4>Horse-ball</h4>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+																	                    do eiusmod tempor incididunt ut labore et dolore magna
+																	                    aliqua.
+							</p>
+							<a href="#" class="text-button">Discover More</a>
+						</div>
+					</li>
+					<li class="feature-item">
+						<div class="left-icon">
+							<img src="{{ absolute_url(asset('img/hunter.png')) }}" alt="gym training"/>
+						</div>
+						<div class="right-content">
+							<h4>Hunter</h4>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+																	                    do eiusmod tempor incididunt ut labore et dolore magna
+																	                    aliqua.
+							</p>
+							<a href="#" class="text-button">Discover More</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block body %}
+	<section class="section min-height" id="features">
+		<div class="card section-heading">
+			<h2 class="card-header text-center text-uppercase py-4">Sign :
+				<em>In</em>
+			</h2>
+			<div class="container">
+				<div class="section-features">
+					<div class="card">
+						<div class="card-body">
+							<form method="post">
+								{% if error %}
+									<div class="alert alert-danger form-group">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+								{% endif %}
+
+								{% if app.user %}
+									<div class="mb-3 form-group">
+										You are logged in as
+										{{ app.user.username }},
+										<a href="{{ path('app_logout') }}">Logout</a>
+									</div>
+								{% endif %}
+
+								<div class="form-group">
+									<label for="inputEmail">Email</label>
+									<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword">Password</label>
+									<input class="form-control" type="password" name="password" id="inputPassword" class="form-control" required>
+								</div>
+								<div class="form-group">
+									<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+									<button class="main-button" type="submit" id="registration-button">Sign in</button>
+									<a class="main-button" role="button" href="{{ path('app_register') }}">Register</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
