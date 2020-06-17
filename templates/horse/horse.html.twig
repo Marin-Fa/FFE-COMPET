@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Horses
+{% endblock %}
+
+{% block body %}
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">My
+                <em>Horses</em>
+            </h2>
+            <div class="container">
+                <div class="section-features">
+                    <div class="card">
+                        {% if (user.horses) %}
+                            {% for horse in horses %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Name :
+                                            {{ horse.name }}
+                                        </h4>
+                                    </div>
+                                    <div class="card-header">Gender :
+                                        {{ horse.gender }}
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">RIDER ID :
+                                            {{ horse.user.id }}</p>
+                                        <br>
+                                        <form method="post" action="{{ path('horse_delete', {'id': horse.id}) }}"
+                                              id="deleteHorse{{ horse.id }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token"
+                                                   value="{{ csrf_token('delete' ~ horse.id) }}">
+                                            <button class="main-button">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <script>
+                                    document.getElementById('deleteHorse' + {{ horse.id }}).addEventListener('submit', event => {
+                                        event.preventDefault();
+                                        return Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "You won't be able to revert this!",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Yes, delete it!'
+                                        }).then((result) => {
+                                            if (result.value) {
+                                                Swal.fire(
+                                                    'Deleted!',
+                                                    'Your horse has been deleted.',
+                                                    'success'
+                                                );
+                                                document.getElementById('deleteHorse' + {{ horse.id }}).submit()
+                                            }
+                                        })
+                                    });
+                                </script>
+                            {% endfor %}
+                        {% endif %}
+                        {% if (user.horses | length == 0) %}
+                            <div class="container">
+                                <div class="card-body text-center">
+                                    <h4>You don't have nay horse registered.
+                                    </h4>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

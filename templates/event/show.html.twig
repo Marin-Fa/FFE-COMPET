@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Event
+{% endblock %}
+
+{% block body %}
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">Description :
+                <em>{{ event.description }}</em>
+            </h2>
+            <div class="card-body text-center">
+                <a href="{{ path('contest_events', { 'id': event.contest.id }) }}">Back to Events</a>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="section-features col-lg-8 col-sm-12">
+                        <div class="card">
+                            <div class="card-header description">
+                                <h4 class="card-title">Description :
+                                    {{ event.description }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Level :
+                                    {{ event.level }}</p>
+                                <p class="card-text">Estimated Starting Time :
+                                    {{ event.estimatedStartingTime | date('H:i:s') }}</p>
+                                <p class="card-text">Max Contestants :
+                                    {{ event.maxContestants }}</p>
+                                <p class="card-text">Contest ID :
+                                    {{ event.contest.id }}</p>
+                                <p class="card-text">Contestants :
+                                    {{ event.horseriders | length }}</p>
+                                <p class="card-text">Event ID :
+                                    {{ event.id }}</p>
+                                <p class="card-text">End of Registration :
+                                    {{ endOfRegistration | date("D-m-y H:i:s") }}</p>
+                                <p class="card-text">Date Now :
+                                    {{ dateNow | date("D-m-y H:i:s") }}</p>
+                                <br>
+                                {% if not app.user %}
+                                    <div class="card-header">
+                                        <p>You are not registered</p>
+                                        <a class="main-button" role="button" href="{{ path('app_register') }}">Register</a>
+                                    </div>
+                                {% elseif ((endOfRegistration) >= (dateNow) and (event.maxContestants > event.horseriders | length) and user.horses | length > 0) %}
+                                    <div class="form-group">
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}">
+                                        <a class="main-button" href="{{ path('horse_rider', {'id': event.id}) }}"
+                                           role="button">Compete !</a>
+                                    </div>
+                                {% elseif (event.maxContestants == event.horseriders | length) %}
+                                    <div class="card-header">
+                                        <p>This Event is already full.</p>
+                                    </div>
+                                {% elseif (user.horses | length == 0) %}
+                                    <div class="card-header">
+                                        <p>You don't have any horses registered</p>
+                                        <a href="{{ path('horse_add') }}" class="main-button">Add horses</a>
+                                    </div>
+                                {% else %}
+                                    <div class="card-header">
+                                        <p>Registration time is exceeded.</p>
+                                    </div>
+                                {% endif %}
+                                <br>
+                                {% if is_granted('ROLE_ORGANIZER') %}
+                                    <form class="flex-row" method="post"
+                                          action="{{ path('event_delete', {'id': event.id}) }}"
+                                          id="deleteEvent{{ event.id }}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('delete' ~ event.id) }}">
+                                        <a class="main-button flex-row"
+                                           href="{{ path('event_edit', { 'id': event.id }) }}" role="button">Modify</a>
+                                        <button class="main-button">Delete</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if event.horseriders is not empty %}
+            <div class="card">
+                <h2 class="card-header text-center text-uppercase py-4">Contestants
+                    <em>List</em></h2>
+                <div class="card-body">
+                    <div id="table" class="table-responsive">
+                        <table class="table-striped text-center table-hover tablesaw tablesaw-stack" data-tablesaw-mode="stack">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Event ID</th>
+                                <th class="text-center">Last Name</th>
+                                <th class="text-center">First Name</th>
+                                <th class="text-center">Horse</th>
+                                <th class="text-center">Licence Number</th>
+                                <th class="text-center">Starting Number</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for eventHorserider in eventHorseriders %}
+                                <tr>
+                                    <td class="pt-3-half text-center">{{ eventHorserider.event.id }}</td>
+                                    <td class="pt-3-half text-center">{{ eventHorserider.user.firstName }}</td>
+                                    <td class="pt-3-half text-center">{{ eventHorserider.user.lastName }}</td>
+                                    <td class="pt-3-half text-center">{{ eventHorserider.horse.name }}</td>
+                                    <td class="pt-3-half text-center">{{ eventHorserider.user.licenceNumber }}</td>
+                                    <td class="pt-3-half text-center">{{ eventHorserider.startNumber }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% if is_granted('ROLE_ORGANIZER') %}
+    <script>
+        document.getElementById('deleteEvent' + {{ event.id }}).addEventListener('submit', event => {
+            event.preventDefault();
+            return Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    );
+                    document.getElementById('deleteEvent' + {{ event.id }}).submit()
+                }
+            })
+        });
+    </script>
+    {% endif %}
+
+
+{% endblock %}

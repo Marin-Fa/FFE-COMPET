@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TEST
+{% endblock %}
+
+{% block body %}
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>Add a :
+                            <em>TEST</em>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                {{ form_start(horseForm, {'attr': {'class': 'form-group col-6'}}) }}
+                {{ form_row(horseForm, {'attr': {'class': 'form-control',
+                    'placeholder' : 'Horse name'}}) }}
+
+                <div class="form-group">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button class="main-button" type="submit">Submit</button>
+                </div>
+                {{ form_end(horseForm) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

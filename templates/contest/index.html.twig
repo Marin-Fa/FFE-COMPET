@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}See all Contests
+{% endblock %}
+
+{% block body %}
+	<section class="section" id="features">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="section-heading" id="contests-list">
+						<h2>Contests
+							<em>List</em>
+						</h2>
+						<br>
+						<form method="post" action="{{ path('contest_create') }}">
+							<button href="{{ path('contest_create') }}" class="main-button">Create Contest</button>
+						</form>
+						<p>{{ now | date('d/m/y') }}</p>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col">
+						<ul class="features-items">
+							{% for contest in contests %}
+								<li class="feature-item">
+									<div class="float-left">
+										<img id="img-contests" class="img-fluid" src="{{ absolute_url(asset('uploads/pictures/' ~ contest.picture )) }}" alt="First One"/>
+									</div>
+									<div class="right-content">
+										<h4>{{ contest.stable_name }}</h4>
+										<p>Adress :
+											{{ contest.adress }}</p>
+										<p>Discipline :
+											{{ contest.discipline }}</p>
+										<p>Beginning date :
+											{{ contest.beginning_date | date('d/m/y') }}</p>
+										<p>Max Contestants Total :
+											{{ contest.max_contestants_total }}</p>
+										<a href="{{ path('contest_show', { 'id': contest.id }) }}" class="text-button">Full day program</a>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

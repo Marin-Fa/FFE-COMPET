@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme eventForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}
+	Add Event
+{% endblock %}
+
+{% block body %}
+	<section class="section min-height" id="features">
+		<div class="card section-heading">
+			<h2 class="card-header text-center text-uppercase py-4">Add a new
+				<em>Event</em>
+			</h2>
+			<div class="container">
+				<div class="section-features">
+					<div class="card">
+						<div class="card-body">
+							{{ form_start(eventForm) }}
+							{{ form_widget(eventForm) }}
+							<div class="form-group">
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								<button class="main-button" type="submit">Send</button>
+							</div>
+							{{ form_end(eventForm) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

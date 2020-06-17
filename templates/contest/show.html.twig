@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ contest.adress }}
+{% endblock %}
+
+{% block body %}
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">Stable Name :
+                <em>{{ contest.stableName }}</em>
+            </h2>
+            <div class="card-body text-center">
+                <a href="{{ path('contest') }}">Back to Competitions</a>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="section-features col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-header discipline">
+                                <h4 class="card-title">Discipline :
+                                    <em>{{ contest.discipline }}</em></h4>
+                            </div>
+                            <div class="card-header">Beginning date :
+                                {{ contest.beginningDate | date('d/m/y') }}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">End date :
+                                    {{ contest.endDate | date('d/m/y') }}</p>
+                                <p class="card-text">End of registration :
+                                    {{ contest.endOfRegistration | date('d/m/y') }}</p>
+                                <p class="card-text">Adress :
+                                    {{ contest.adress }}</p>
+                                <p class="card-text">Zipcode :
+                                    {{ contest.zipcode }}</p>
+                                <p class="card-text">City :
+                                    {{ contest.city }}</p>
+                                <p class="card-text">Counrty :
+                                    {{ contest.country }}</p>
+                                <p class="card-text">Max contestants total :
+                                    {{ contest.maxContestantsTotal }}</p>
+                                <p class="card-text">Contest ID :
+                                    {{ contest.id }}</p>
+                                <p class="card-text">Contest EVENT :
+                                    {{ contest.events | length }}</p>
+                                <br>
+                                {% if is_granted('ROLE_ORGANIZER') %}
+                                    <div class="form-group">
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}">
+                                        <a class="main-button" href="{{ path('event_create', {'id': contest.id}) }}" role="button">Add Event</a>
+                                        <a class="main-button" href="{{ path('contest_edit', {'id': contest.id}) }}"
+                                           role="button">Modify</a>
+                                    </div>
+                                    <form method="post" action="{{ path('contest_delete', {'id': contest.id}) }}"
+                                          id="deleteContest{{ contest.id }}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('delete' ~ contest.id) }}">
+                                        <button class="main-button delete-button">Delete</button>
+                                    </form>
+                                    <br>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-icon col-md-6 col-sm-12">
+                        <img class="img-fluid" src="{{ absolute_url(asset('uploads/pictures/' ~ contest.picture )) }}"
+                             alt="First One" style="border: solid black 1px; padding: 5px; border-radius: .25rem"/>
+                        <div class="form-group">
+                            <a class="main-button" href="{{ path('contest_events', { 'id': contest.id }) }} "
+                               role="button">See All Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if is_granted('ROLE_ORGANIZER') %}
+    <script>
+        document.getElementById('deleteContest' + {{ contest.id }}).addEventListener('submit', event => {
+            event.preventDefault();
+            return Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    );
+                    document.getElementById('deleteContest' + {{ contest.id }}).submit()
+                }
+            })
+        });
+    </script>
+    {% endif %}
+{% endblock %}
