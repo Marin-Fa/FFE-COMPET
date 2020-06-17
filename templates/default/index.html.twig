@@ -25,12 +25,10 @@
 				<br>
 				<br>
 				<br>
-				{% for label, messages in app.flashes %}
-					{% for message in messages %}
-						<h6 class="flash-{{ label }}">
-							{{ message }}
-						</h6>
-					{% endfor %}
+				{% for message in app.flashes('notice') %}
+					<h6 class="flash-notice">
+						{{ message }}
+					</h6>
 				{% endfor %}
 			</div>
 		</div>

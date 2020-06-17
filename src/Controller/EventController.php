@@ -28,7 +28,7 @@ class EventController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Event::class);
         $events = $repo->findAll();
-//        dump($events);
+
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
             'events' => $events
@@ -41,7 +41,7 @@ class EventController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Event::class);
         $events = $repo->findAll();
-//        dump($events);
+
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
             'events' => $events
@@ -79,7 +79,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
         }
-//        dump($contest);
+
         return $this->render('event/add-event.html.twig', [
             'eventForm' => $form->createView(),
         ]);
@@ -126,6 +126,7 @@ class EventController extends AbstractController
         $contest = $event->getContest()->getId();
         $endOfRegistration =  $event->getContest()->getEndOfRegistration();
         $dateNow = new \DateTime();
+
         return $this->render('event/show.html.twig', [
             'event' => $event,
             'horseriders' => $horseriders,
@@ -146,7 +147,7 @@ class EventController extends AbstractController
     public function delete(Request $request, Event $event): Response
     {
         $contest = $event->getContest();
-//        dump($contest);
+
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($event);

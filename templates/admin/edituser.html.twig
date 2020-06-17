@@ -35,10 +35,41 @@
 								<button class="main-button" role="button" type="submit">Submit</button>
 							</div>
 							{{ form_end(userForm) }}
+							<form method="post" action="{{ path('admin_delete_user', {'id': user.id}) }}" id="deleteUser{{ user.id }}">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token"
+									   value="{{ csrf_token('delete' ~ user.id) }}">
+								<input type="submit" class="main-button delete-button" value="Delete">
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('deleteUser' + {{ user.id }}).addEventListener('submit', event => {
+				event.preventDefault();
+				return Swal.fire({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+					if (result.value) {
+						Swal.fire(
+								'Deleted!',
+								'Your file has been deleted.',
+								'success'
+						);
+						document.getElementById('deleteUser' + {{ user.id }}).submit()
+					}
+				})
+			});
+		</script>
+	{% endif %}
 {% endblock %}
