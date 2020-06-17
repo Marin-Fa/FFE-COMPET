@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ absolute_url(asset('img/ffe.png')) }}"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
+            integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
+            crossorigin="anonymous"></script>
+    <title>
+        {% block title %}
+            FFE COMPET
+        {% endblock %}
+    </title>
+    <meta name="author" content="Marine Fayolle">
+    <meta name="publisher" content="Marine Fayolle">
+    <meta name="headline" content="FFE COMPET equestrian contests">
+    <meta name="mainEntityOfPage" content="https://ffecompet.marinefayolle.com/">
+    <meta name="image" content="https://ffecompet.marinefayolle.com/img/favicon.svg">
+    <meta name="description" content="FFE COMPET" />
+    <meta name="keywords" content="equestrian, horses, horse, horseriders, horserider, contest, events, cheval, chevaux, concours, cavaliers, épreuves, competitions, competition, stables, stable, écuries, écurie, discipline, level, cso, hunter, dressage, horse-ball, cce, concours complet, endurance" />
+    <meta itemprop="name" content="FFE COMPET equestrian contests">
+    <meta itemprop="url" content="https://ffecompet.marinefayolle.com/">
+    <meta itemprop="author" content="Marine Fayolle">
+    <meta itemprop="publisher" content="Marine Fayolle">
+    <meta itemprop="headline" content="FFE COMPET equestrian contests">
+    <meta itemprop="mainEntityOfPage" content="https://ffecompet.marinefayolle.com/">
+    <meta itemprop="image" content="https://ffecompet.marinefayolle.com/img/favicon.svg">
+    <meta itemprop="description" content="Marine Fayolle Développeuse Web Portfolio">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Marine Fayolle Développeuse Web">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ffecompet.marinefayolle.com/">
+    <meta property="og:image" content="https://ffecompet.marinefayolle.com/img/favicon.svg">
+    <meta property="og:site_name" content="FFE COMPET">
+    <meta property="og:description" content="FFE COMPET equestrian contests">
+    <meta name="twitter:card" content="FFE COMPET">
+    <meta name="twitter:site" content="FFE COMPET">
+    <meta name="twitter:creator" content="Marine Fayolle">
+    <meta name="twitter:title" content="FFE COMPET">
+    <meta name="twitter:image:src" content="https://ffecompet.marinefayolle.com/img/favicon.svg">
+    {# Tarte au citron #}
+    <script type="text/javascript" src="{{ absolute_url(asset('js/tarteaucitron/tarteaucitron.js')) }}"></script>
+    <script type="text/javascript">
+        tarteaucitron.init({
+            "privacyUrl": "", /* Privacy policy url */
+
+            "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+            "cookieName": "tarteaucitron", /* Cookie name */
+
+            "orientation": "middle", /* Banner position (top - bottom) */
+            "showAlertSmall": true, /* Show the small banner on bottom right */
+            "cookieslist": true, /* Show the cookie list */
+
+            "adblocker": false, /* Show a Warning if an adblocker is detected */
+            "AcceptAllCta": true, /* Show the accept all button when highPrivacy on */
+            "highPrivacy": true, /* Disable auto consent */
+            "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+            "removeCredit": false, /* Remove credit link */
+            "moreInfoLink": true, /* Show more info link */
+            "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+
+            //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+
+            "readmoreLink": "/cookiespolicy" /* Change the default readmore link */
+        });
+    </script>
+    {# Bootstrap / Jquery #}
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+            crossorigin="anonymous"></script>
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {# SweetAlert #}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.13/dist/sweetalert2.all.min.js"></script>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ absolute_url(asset('css/style.css')) }}"/>
+        <link rel="stylesheet" href="{{ absolute_url(asset('css/tablesaw.css')) }}"/>
+    {% endblock %}
+</head>
+<body>
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav navbar-dark">
+                    <a href="{{ path('home') }}" class="logo">FFE<em>
+                            Compet</em>
+                    </a>
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="{{ path('home') }}" class="active">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('contest') }}">Competitions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('contact') }}">Contact</a>
+                        </li>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li class="nav-item">
+                                <a href="{{ path('app_logout') }}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{{ path('app_login') }}">Login</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a href="{{ path('admin_user') }}">Admin</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li class="nav-item">
+                                <a href="{{ path('app_user') }}">My Profil</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>{% block body %}{% endblock %}</main>
+
+<footer class="footer ftco-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="flex-center icon-social">
+                    <a class="fb-ic">
+                        <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="play-ic">
+                        <i class="fab fa-google-play fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="app-ic">
+                        <i class="fab fa-apple fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="ins-ic">
+                        <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="pin-ic">
+                        <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <a href="{{ path('app_rgpd') }}">Privacy & Policy</a>
+    <div id="copyright" class="col-lg-12">
+        <p>Copyright &copy; 2020 FFE Compet</p>
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ absolute_url(asset('js/scrollreveal.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/custom.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/accordions.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/mixitup.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/tablesaw.js')) }}"></script>
+    <script src="{{ absolute_url(asset('js/tablesaw-init.js')) }}"></script>
+    <script>(tarteaucitron.job = tarteaucitron.job || []).push('facebook');</script>
+
+
+    <script>
+        $('.custom-file-input').on('change', function (event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent().find('.custom-file-label').html(inputFile.files[0].name);
+        });
+    </script>
+
+    <script>
+        tarteaucitron.user.gajsUa = 'UA-XXXXXXXX-X';
+        tarteaucitron.user.gajsMore = function () { /* add here your optionnal _ga.push() */
+        };
+        (tarteaucitron.job = tarteaucitron.job || []).push('gajs');
+    </script>
+
+
+{% endblock %}
+</body>
+</html>
