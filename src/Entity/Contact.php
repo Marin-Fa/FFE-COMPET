@@ -34,7 +34,7 @@ class Contact
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *     min=20,
+     *     min=2,
      *     minMessage="subject.too_short",
      *     max=255,
      *     maxMessage="subject.too_long"

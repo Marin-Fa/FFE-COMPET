@@ -89,6 +89,13 @@
             <div class="card">
                 <h2 class="card-header text-center text-uppercase py-4">Contestants
                     <em>List</em></h2>
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <h6 class="text-center flash-{{ label }}">
+                            {{ message }}
+                        </h6>
+                    {% endfor %}
+                {% endfor %}
                 <div class="card-body">
                     <div id="table" class="table-responsive">
                         <table class="table-striped text-center table-hover tablesaw tablesaw-stack" data-tablesaw-mode="stack">

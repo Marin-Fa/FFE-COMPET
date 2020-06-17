@@ -62,6 +62,11 @@ class HorseRiderController extends AbstractController
                 $entityManager->persist($horserider);
                 $entityManager->flush();
 
+                $this->addFlash(
+                    'notice',
+                    'Successful event registration, good luck !'
+                );
+
                 return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
             } else {
                 $this->addFlash(

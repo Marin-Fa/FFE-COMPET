@@ -22,6 +22,16 @@
 						<a href="{{ path('app_register') }}">Become a member</a>
 					</div>
 				{% endif %}
+				<br>
+				<br>
+				<br>
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<h6 class="flash-{{ label }}">
+							{{ message }}
+						</h6>
+					{% endfor %}
+				{% endfor %}
 			</div>
 		</div>
 	</div>
