@@ -17,7 +17,7 @@ Install the `FFE-COMPET` binary on your computer and run
 this command:
 
 ```bash
-$ git clone https://github.com/Marin-Fa/FFE-COMPET-P5-MASTER.git
+$ git clone https://github.com/Marin-Fa/FFE-COMPET.git
 ```
 
 Usage
