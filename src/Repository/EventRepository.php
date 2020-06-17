@@ -18,19 +18,6 @@ class EventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Event::class);
     }
-    public function findOneByIdJoinedToCategory($eventId)
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT e, c
-            FROM App\Entity\Event e
-            INNER JOIN e.contest c
-            WHERE e.id = :id'
-        )->setParameter('id', $eventId);
-
-        return $query->getOneOrNullResult();
-    }
 
     // /**
     //  * @return Event[] Returns an array of Event objects
@@ -60,4 +47,18 @@ class EventRepository extends ServiceEntityRepository
         ;
     }
     */
+
+//    public function findOneByIdJoinedToCategory($eventId)
+//    {
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT e, c
+//            FROM App\Entity\Event e
+//            INNER JOIN e.contest c
+//            WHERE e.id = :id'
+//        )->setParameter('id', $eventId);
+//
+//        return $query->getOneOrNullResult();
+//    }
 }

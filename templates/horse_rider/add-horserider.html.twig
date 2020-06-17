@@ -1,56 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Horse Rider
+{% block title %}
+    Horse Rider
 {% endblock %}
 
 {% block body %}
-	<section class="section" id="features">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="section-heading">
-						<h2>Create :
-							<em>Horse Rider</em>
-						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<table class="table table-hover text-center">
-					<thead>
-					<th scope="col">Contest<br>Adress</th>
-					<th scope="col">Event</th>
-					<th scope="col">Level</th>
-					<th scope="col">First Name</th>
-					<th scope="col">Last Name</th>
-					<th scope="col">License Number</th>
-					<th scope="col">Horse</th>
-					<th scope="col">Date</th>
-					<th scope="col">Estimated Starting Time</th>
-					</thead>
-					<tbody>
-					<tr>
-						<td>{{ event.contest.adress }}</td>
-						<td>{{ event.description }}</td>
-						<td>{{ event.level }}</td>
-						<td>{{ user.firstname }}</td>
-						<td>{{ user.lastname }}</td>
-						<td>{{ user.licenceNumber }}</td>
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>Create :
+                            <em>Horse Rider</em>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <table class="table table-hover text-center">
+                    <thead>
+                    <th scope="col">Contest<br>Adress</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">License Number</th>
+                    <th scope="col">Horse</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Estimated Starting Time</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ event.contest.adress }}</td>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.level }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.licenceNumber }}</td>
 
-						<td>{{ user.horse.name }}
-						</td>
-						<td>{{ event.date | date('d/m/y') }}</td>
-						<td>{{ event.estimatedStartingTime | date('H:i:s') }}</td>
-					</tr>
-					</tbody>
-				</table>
-				<div class="form-group">
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-					<a class="main-button" href="" role="button">Register</a>
-				</div>
-			</div>
-	</section>
+                        <td>{{ user.horse.name }}
+                        </td>
+                        <td>{{ event.date | date('d/m/y') }}</td>
+                        <td>{{ event.estimatedStartingTime | date('H:i:s') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <a class="main-button" href="" role="button">Register</a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 

@@ -27,9 +27,7 @@ class ContestController extends AbstractController
     public function index(ContestRepository $contestRepository, Request $request, Contest $contest = null, PaginatorInterface $paginator)
     {
         $now = new \DateTime();
-//        $contests = $contestRepository->findAllByBeginningDate($now);
         $data = $this->getDoctrine()->getRepository(Contest::class)->findBy([], ['creation_date' => 'desc']);
-//        $data = $contestRepository->findAllByBeginningDate($now);
 
         $contests = $paginator->paginate(
             $data,
@@ -37,7 +35,7 @@ class ContestController extends AbstractController
             4
         );
 
-        return $this->render('contest/test.html.twig', [
+        return $this->render('contest/index.html.twig', [
             'controller_name' => 'ContestController',
             'contests' => $contests,
             'now' => $now,

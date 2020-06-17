@@ -36,29 +36,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findOneByIdJoinedToHorse($userId)
-    {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT u, h
-            FROM App\Entity\User u
-            INNER JOIN u.horses h
-            WHERE u.id = :id'
-        )->setParameter('id', $userId);
-        return $query->getOneOrNullResult();
-    }
-
-    public function findByRoleAdmin()
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('u')
-            ->from('App\Entity\User', 'u')
-            ->where('u.roles LIKE :role')
-            ->setParameter('role', ['ROLE_ADMIN']);
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function findByRole($role)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -70,26 +47,49 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function findOneByRole($role)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.roles = :role')
-            ->setParameter('role', $role)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-
-    public function findOneByUsernameOrEmail($username)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.first_name = :first_name OR u.email = :email')
-            ->setParameter('first_name', $username)
-            ->setParameter('email', $username)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
+//    public function findOneByIdJoinedToHorse($userId)
+//    {
+//        $entityManager = $this->getEntityManager();
+//        $query = $entityManager->createQuery(
+//            'SELECT u, h
+//            FROM App\Entity\User u
+//            INNER JOIN u.horses h
+//            WHERE u.id = :id'
+//        )->setParameter('id', $userId);
+//        return $query->getOneOrNullResult();
+//    }
+//
+//    public function findByRoleAdmin()
+//    {
+//        $qb = $this->_em->createQueryBuilder();
+//        $qb->select('u')
+//            ->from('App\Entity\User', 'u')
+//            ->where('u.roles LIKE :role')
+//            ->setParameter('role', ['ROLE_ADMIN']);
+//
+//        return $qb->getQuery()->getResult();
+//    }
+//
+//    public function findOneByRole($role)
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.roles = :role')
+//            ->setParameter('role', $role)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//            ;
+//    }
+//
+//    public function findOneByUsernameOrEmail($username)
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.first_name = :first_name OR u.email = :email')
+//            ->setParameter('first_name', $username)
+//            ->setParameter('email', $username)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//            ;
+//    }
 
     // /**
     //  * @return User[] Returns an array of User objects

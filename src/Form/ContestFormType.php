@@ -35,7 +35,6 @@ class ContestFormType extends AbstractType
                     'ENDURANCE' => 'ENDURANCE',
                 ],
                 'choice_attr' => function ($choice, $key, $value) {
-                    // adds a class like attending_yes, attending_no, etc
                     return ['class' => 'discipline_' . strtolower($key)];
                 },
             ])

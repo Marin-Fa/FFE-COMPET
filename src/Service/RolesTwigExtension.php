@@ -7,6 +7,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 class RolesTwigExtension extends AbstractExtension {
+
     public function getFilters() {
         return [
             new TwigFilter('getRoles', [$this, 'getRoles']),
@@ -22,6 +23,7 @@ class RolesTwigExtension extends AbstractExtension {
 //
 //        return $roles;
 //    }
+
     public function getName() {
         return 'roles_filter_twig_extension';
     }

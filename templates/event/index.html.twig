@@ -12,10 +12,10 @@
                 <a href="{{ path('contest_show', { 'id': contest.id }) }}">Back to Contest</a>
             </div>
             {% if is_granted('ROLE_ORGANIZER') %}
-            <div class="text-center">
+                <div class="text-center">
                     <a class="main-button" href="{{ path('event_create', { 'id': contest.id }) }}"
                        role="button">Create an Event</a>
-            </div>
+                </div>
             {% endif %}
             {% if contest.events | length == 0 %}
                 <div class="container">
@@ -25,38 +25,41 @@
                     </div>
                 </div>
             {% else %}
-            <div class="card-body">
-                <div id="table" class="table-responsive">
-                    <table class="table-striped text-center table-hover tablesaw tablesaw-stack" data-tablesaw-mode="stack">
-                        <thead>
-                        <tr>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Level</th>
-                            <th class="text-center">End of registration</th>
-                            <th class="text-center">Estimated Starting Time</th>
-                            <th class="text-center">Max Contestants</th>
-                            <th class="text-center">Contestants</th>
-                            <th class="text-center">See Event</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for event in events %}
+                <div class="card-body">
+                    <div id="table" class="table-responsive">
+                        <table class="table-striped text-center table-hover tablesaw tablesaw-stack"
+                               data-tablesaw-mode="stack">
+                            <thead>
                             <tr>
-                                <td class="pt-3-half text-center">{{ event.description }}</td>
-                                <td class="pt-3-half text-center">{{ event.date | date('d/m/y') }}</td>
-                                <td class="pt-3-half text-center">{{ event.level }}</td>
-                                <td class="pt-3-half text-center">{{ contest.endOfRegistration | date('d/m/y') }}</td>
-                                <td class="pt-3-half text-center">{{ event.estimatedStartingTime | date('H:i:s') }}</td>
-                                <td class="pt-3-half text-center">{{ event.maxContestants }}</td>
-                                <td class="pt-3-half text-center">{{ event.horseriders | length }}</td>
-                                <td class="pt-3-half text-center"><a class="main-button" href="{{ path('event_show', { 'id': event.id }) }}" role="button">See Event</a><br></td>
+                                <th class="text-center">Description</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Level</th>
+                                <th class="text-center">End of registration</th>
+                                <th class="text-center">Estimated Starting Time</th>
+                                <th class="text-center">Max Contestants</th>
+                                <th class="text-center">Contestants</th>
+                                <th class="text-center">See Event</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for event in events %}
+                                <tr>
+                                    <td class="pt-3-half text-center">{{ event.description }}</td>
+                                    <td class="pt-3-half text-center">{{ event.date | date('d/m/y') }}</td>
+                                    <td class="pt-3-half text-center">{{ event.level }}</td>
+                                    <td class="pt-3-half text-center">{{ contest.endOfRegistration | date('d/m/y') }}</td>
+                                    <td class="pt-3-half text-center">{{ event.estimatedStartingTime | date('H:i:s') }}</td>
+                                    <td class="pt-3-half text-center">{{ event.maxContestants }}</td>
+                                    <td class="pt-3-half text-center">{{ event.horseriders | length }}</td>
+                                    <td class="pt-3-half text-center"><a class="main-button"
+                                                                         href="{{ path('event_show', { 'id': event.id }) }}"
+                                                                         role="button">See Event</a><br></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
             {% endif %}
         </div>
     </section>

@@ -28,15 +28,12 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $choices = $user->getRoles();
-//        $roles = $this->getParameter('security.role_hierarchy.roles');
-//        dump($roles);
-//        dump($choices);
+
         $roles = $form->get('roles');
         $data = [];
         foreach ($roles as $role) {
             $data[] = $role->getName();
         }
-//        dump($data);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(

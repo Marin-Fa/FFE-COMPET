@@ -43,7 +43,8 @@
                                 {% if not app.user %}
                                     <div class="card-header">
                                         <p>You are not registered</p>
-                                        <a class="main-button" role="button" href="{{ path('app_register') }}">Register</a>
+                                        <a class="main-button" role="button"
+                                           href="{{ path('app_register') }}">Register</a>
                                     </div>
                                 {% elseif ((endOfRegistration) >= (dateNow) and (event.maxContestants > event.horseriders | length) and user.horses | length > 0) %}
                                     <div class="form-group">
@@ -98,7 +99,8 @@
                 {% endfor %}
                 <div class="card-body">
                     <div id="table" class="table-responsive">
-                        <table class="table-striped text-center table-hover tablesaw tablesaw-stack" data-tablesaw-mode="stack">
+                        <table class="table-striped text-center table-hover tablesaw tablesaw-stack"
+                               data-tablesaw-mode="stack">
                             <thead>
                             <tr>
                                 <th class="text-center">Event ID</th>
@@ -129,30 +131,28 @@
     </section>
     {% endif %}
     {% if is_granted('ROLE_ORGANIZER') %}
-    <script>
-        document.getElementById('deleteEvent' + {{ event.id }}).addEventListener('submit', event => {
-            event.preventDefault();
-            return Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    );
-                    document.getElementById('deleteEvent' + {{ event.id }}).submit()
-                }
-            })
-        });
-    </script>
+        <script>
+            document.getElementById('deleteEvent' + {{ event.id }}).addEventListener('submit', event => {
+                event.preventDefault();
+                return Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        );
+                        document.getElementById('deleteEvent' + {{ event.id }}).submit()
+                    }
+                })
+            });
+        </script>
     {% endif %}
-
-
 {% endblock %}

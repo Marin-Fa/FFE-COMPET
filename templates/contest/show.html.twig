@@ -48,7 +48,8 @@
                                     <div class="form-group">
                                         <input type="hidden" name="_csrf_token"
                                                value="{{ csrf_token('authenticate') }}">
-                                        <a class="main-button" href="{{ path('event_create', {'id': contest.id}) }}" role="button">Add Event</a>
+                                        <a class="main-button" href="{{ path('event_create', {'id': contest.id}) }}"
+                                           role="button">Add Event</a>
                                         <a class="main-button" href="{{ path('contest_edit', {'id': contest.id}) }}"
                                            role="button">Modify</a>
                                     </div>
@@ -77,28 +78,28 @@
         </div>
     </section>
     {% if is_granted('ROLE_ORGANIZER') %}
-    <script>
-        document.getElementById('deleteContest' + {{ contest.id }}).addEventListener('submit', event => {
-            event.preventDefault();
-            return Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    );
-                    document.getElementById('deleteContest' + {{ contest.id }}).submit()
-                }
-            })
-        });
-    </script>
+        <script>
+            document.getElementById('deleteContest' + {{ contest.id }}).addEventListener('submit', event => {
+                event.preventDefault();
+                return Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        );
+                        document.getElementById('deleteContest' + {{ contest.id }}).submit()
+                    }
+                })
+            });
+        </script>
     {% endif %}
 {% endblock %}

@@ -123,7 +123,6 @@ class Horse
     {
         if ($this->horseriders->contains($horserider)) {
             $this->horseriders->removeElement($horserider);
-            // set the owning side to null (unless already changed)
             if ($horserider->getHorse() === $this) {
                 $horserider->setHorse(null);
             }

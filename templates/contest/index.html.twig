@@ -4,45 +4,49 @@
 {% endblock %}
 
 {% block body %}
-	<section class="section" id="features">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="section-heading" id="contests-list">
-						<h2>Contests
-							<em>List</em>
-						</h2>
-						<br>
-						<form method="post" action="{{ path('contest_create') }}">
-							<button href="{{ path('contest_create') }}" class="main-button">Create Contest</button>
-						</form>
-						<p>{{ now | date('d/m/y') }}</p>
-					</div>
-				</div>
-				<div class="container">
-					<div class="col">
-						<ul class="features-items">
-							{% for contest in contests %}
-								<li class="feature-item">
-									<div class="float-left">
-										<img id="img-contests" class="img-fluid" src="{{ absolute_url(asset('uploads/pictures/' ~ contest.picture )) }}" alt="First One"/>
-									</div>
-									<div class="right-content">
-										<h4>{{ contest.stable_name }}</h4>
-										<p>Adress :
-											{{ contest.adress }}</p>
-										<p>Discipline :
-											{{ contest.discipline }}</p>
-										<p>Beginning date :
-											{{ contest.beginning_date | date('d/m/y') }}</p>
-										<p>Max Contestants Total :
-											{{ contest.max_contestants_total }}</p>
-										<a href="{{ path('contest_show', { 'id': contest.id }) }}" class="text-button">Full day program</a>
-									</div>
-								</li>
-							{% endfor %}
-						</ul>
-					</div>
+	<section class="section min-height" id="features">
+		<div class="card section-heading">
+			<h2 class="card-header text-center text-uppercase py-4">Contests
+				<em>List</em></h2>
+			<br>
+			<div class="text-center">
+				{% if is_granted('ROLE_ORGANIZER') %}
+					<form method="post" action="{{ path('contest_create') }}">
+						<button href="{{ path('contest_create') }}" class="main-button">Create Contest</button>
+					</form>
+				{% endif %}
+			</div>
+			<div class="card-body">
+				<div id="table" class="table-responsive">
+					<table class="table table-bordered table-striped text-center table-hover tablesaw tablesaw-stack" data-tablesaw-mode="stack">
+						<thead>
+						<tr>
+							<th class="text-center">Picture</th>
+							<th class="text-center">Stable name</th>
+							<th class="text-center">Zipcode</th>
+							<th class="text-center">Discipline</th>
+							<th class="text-center">Beginning date</th>
+							<th class="text-center">Events</th>
+							<th class="text-center">Total Contestants</th>
+							<th class="text-center">Full day program</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for contest in contests %}
+							<tr>
+								<td class="pt-3-half text-center"><img id="img-contests" class="img-fluid" src="{{ absolute_url(asset('uploads/pictures/' ~ contest.picture )) }}"/></td>
+								<td class="pt-3-half text-center">{{ contest.stableName }}</td>
+								<td class="pt-3-half text-center">{{ contest.zipcode }}</td>
+								<td class="pt-3-half text-center">{{ contest.discipline }}</td>
+								<td class="pt-3-half text-center">{{ contest.beginningDate | date('d/m/y') }}</td>
+								<td class="pt-3-half text-center">{{ contest.events | length }}</td>
+								<td class="pt-3-half text-center">{{ contest.maxContestantsTotal }}</td>
+								<td class="pt-3-half text-center"><a href="{{ path('contest_show', { 'id': contest.id }) }}" class="main-button">Full day program</a></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+					{{ knp_pagination_render(contests) }}
 				</div>
 			</div>
 		</div>

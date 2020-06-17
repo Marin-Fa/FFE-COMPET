@@ -44,10 +44,6 @@ class RoleType extends AbstractType
             ]
         ]);
     }
-//    public function getParent()
-//    {
-//        return 'choice';
-//    }
 
     public function getName()
     {

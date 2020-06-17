@@ -23,48 +23,6 @@ class HorseRepository extends ServiceEntityRepository
         $this->security = $security;
     }
 
-    /**
-     * @return Horse[]
-     */
-    public function findAllHorses(): array
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT h
-            FROM App\Entity\Horse h
-            WHERE h.user = :val'
-        )->setParameter('val', $this->security->getUser());
-
-        // returns an array of Product objects
-        return $query->getResult();
-    }
-
-    /**
-     * @param $value
-     * @return Horse[]
-     */
-    public function selectOneHorse($value): array
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.id = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @param $horse
-     * @return array
-     */
-    public function OneHorse($horse): array
-    {
-        $qb = $this->createQueryBuilder('h')
-            ->where('h.id')
-            ->setParameter('horse', $horse);
-        $query = $qb->getQuery();
-        return $query->execute();
-    }
     // /**
     //  * @return Horse[] Returns an array of Horse objects
     //  */

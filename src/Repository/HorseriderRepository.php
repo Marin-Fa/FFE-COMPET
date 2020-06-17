@@ -19,18 +19,6 @@ class HorseriderRepository extends ServiceEntityRepository
         parent::__construct($registry, Horserider::class);
     }
 
-    public function findAllByHorseRiders($startNumber)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('h')
-            ->from($this->_entityName, 'h')
-            ->where('h.user = :user')
-            ->orderBy('h.start_number', 'ASC')
-            ->setParameter('user', $startNumber)
-        ;
-        return $qb->getQuery()->getArrayResult();
-    }
-
     public function findByIdEvent($eventId)
     {
         $entityManager = $this->getEntityManager();
@@ -45,20 +33,6 @@ class HorseriderRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    // /**
-    //  * @return Horserider[] Returns an array of Horserider objects
-    //  */
-    public function findByStartNumber($number)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.start_number = :number')
-            ->setParameter('number', $number)
-            ->orderBy('h.start_number', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
     /*
     public function findOneBySomeField($value): ?Horserider
     {
@@ -70,4 +44,27 @@ class HorseriderRepository extends ServiceEntityRepository
         ;
     }
     */
+
+//    public function findAllByHorseRiders($startNumber)
+//    {
+//        $qb = $this->_em->createQueryBuilder();
+//        $qb->select('h')
+//            ->from($this->_entityName, 'h')
+//            ->where('h.user = :user')
+//            ->orderBy('h.start_number', 'ASC')
+//            ->setParameter('user', $startNumber)
+//        ;
+//        return $qb->getQuery()->getArrayResult();
+//    }
+//
+//    public function findByStartNumber($number)
+//    {
+//        return $this->createQueryBuilder('h')
+//            ->andWhere('h.start_number = :number')
+//            ->setParameter('number', $number)
+//            ->orderBy('h.start_number', 'ASC')
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
 }

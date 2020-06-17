@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register your horse
+{% block title %}
+    Register your horse
 {% endblock %}
 
 {% block body %}
@@ -27,7 +28,6 @@
                         <td>
                             {{ form_start(selectHorseForm) }}
                             {{ form_widget(selectHorseForm) }}
-{#                            {{ dump(horses | length) }}#}
                             {{ form_end(selectHorseForm) }}
                         </td>
                     </tr>

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register for this Event
+{% block title %}
+    Register for this Event
 {% endblock %}
 
 {% block body %}
@@ -16,7 +17,8 @@
             <div class="card">
                 <div class="card-body">
                     <div id="table" class="table-responsive">
-                        <table class="table table-bordered table-striped text-center table-hover tablesaw tablesaw-stack" data-tablesaw-mode="stack">
+                        <table class="table table-bordered table-striped text-center table-hover tablesaw tablesaw-stack"
+                               data-tablesaw-mode="stack">
                             <thead>
                             <tr>
                                 <th class="text-center">Contest<br>Adress</th>
@@ -31,25 +33,25 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="pt-3-half text-center">{{ event.contest.adress }}</td>
-                                    <td class="pt-3-half text-center">{{ event.description }}</td>
-                                    <td class="pt-3-half text-center">{{ event.level }}</td>
-                                    <td class="pt-3-half text-center">{{ user.firstname }}</td>
-                                    <td class="pt-3-half text-center">{{ user.lastname }}</td>
-                                    <td class="pt-3-half text-center">{{ user.licenceNumber }}</td>
-                                    <td class="pt-3-half text-center">
-                                        {{ form_start(horseForm) }}
-                                        {{ form_widget(horseForm) }}
-                                        <br>
-                                        <div class="form-group">
-                                            <input class="main-button" type="submit" value="Submit">
-                                        </div>
-                                        {{ form_end(horseForm) }}
-                                    </td>
-                                    <td class="pt-3-half text-center">{{ event.date | date('d/m/y') }}</td>
-                                    <td class="pt-3-half text-center">{{ event.estimatedStartingTime | date('H:i:s') }}</td>
-                                </tr>
+                            <tr>
+                                <td class="pt-3-half text-center">{{ event.contest.adress }}</td>
+                                <td class="pt-3-half text-center">{{ event.description }}</td>
+                                <td class="pt-3-half text-center">{{ event.level }}</td>
+                                <td class="pt-3-half text-center">{{ user.firstname }}</td>
+                                <td class="pt-3-half text-center">{{ user.lastname }}</td>
+                                <td class="pt-3-half text-center">{{ user.licenceNumber }}</td>
+                                <td class="pt-3-half text-center">
+                                    {{ form_start(horseForm) }}
+                                    {{ form_widget(horseForm) }}
+                                    <br>
+                                    <div class="form-group">
+                                        <input class="main-button" type="submit" value="Submit">
+                                    </div>
+                                    {{ form_end(horseForm) }}
+                                </td>
+                                <td class="pt-3-half text-center">{{ event.date | date('d/m/y') }}</td>
+                                <td class="pt-3-half text-center">{{ event.estimatedStartingTime | date('H:i:s') }}</td>
+                            </tr>
                             </tbody>
                         </table>
                         {% for message in app.flashes('notice') %}

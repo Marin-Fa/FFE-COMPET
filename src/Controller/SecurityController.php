@@ -15,8 +15,11 @@ class SecurityController extends AbstractController
         $user = $this->getUser();
         return new Response('Well hi there '.$user->getFirstName());
     }
+
     /**
      * @Route("/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

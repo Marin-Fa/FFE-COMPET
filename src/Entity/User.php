@@ -81,11 +81,6 @@ class User implements UserInterface, \Serializable
         $this->horseriders = new ArrayCollection();
         $this->tests = new ArrayCollection();
         $this->horses = new ArrayCollection();
-//        $this->roles = array(
-//            'Admin'   => 'ROLE_ADMIN',
-//            'Organizer'   => 'ROLE_ORGANIZER',
-//            'Rider' => 'ROLE_RIDER',
-//        );
     }
 
     /**

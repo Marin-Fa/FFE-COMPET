@@ -6,31 +6,30 @@
 {% endblock %}
 
 {% block body %}
-	<section class="section min-height" id="features">
-		<div class="card section-heading">
-			<h2 class="card-header text-center text-uppercase py-4">Register :</h2>
-			<div class="container">
-				<div class="section-features">
-					<div class="card">
-						<div class="card-body">
-							{{ form_start(registrationForm) }}
-							{{ form_row(registrationForm.email) }}
-							{{ form_row(registrationForm.first_name) }}
-							{{ form_row(registrationForm.last_name) }}
-							{{ form_row(registrationForm.roles) }}
-							{{ form_row(registrationForm.licence_number) }}
-							{{ form_row(registrationForm.password) }}
-
-							<div class="form-group">
-								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-								<button class="main-button" type="submit" id="registration-button">Submit</button>
-								<a class="main-button" role="button" href="{{ path('app_login') }}">Login</a>
-							</div>
-							{{ form_end(registrationForm) }}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="section min-height" id="features">
+        <div class="card section-heading">
+            <h2 class="card-header text-center text-uppercase py-4">Register :</h2>
+            <div class="container">
+                <div class="section-features">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ form_start(registrationForm) }}
+                            {{ form_row(registrationForm.email) }}
+                            {{ form_row(registrationForm.first_name) }}
+                            {{ form_row(registrationForm.last_name) }}
+                            {{ form_row(registrationForm.roles) }}
+                            {{ form_row(registrationForm.licence_number) }}
+                            {{ form_row(registrationForm.password) }}
+                            <div class="form-group">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <button class="main-button" type="submit" id="registration-button">Submit</button>
+                                <a class="main-button" role="button" href="{{ path('app_login') }}">Login</a>
+                            </div>
+                            {{ form_end(registrationForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

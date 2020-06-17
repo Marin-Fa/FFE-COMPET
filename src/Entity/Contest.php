@@ -295,7 +295,6 @@ class Contest
     {
         if ($this->events->contains($event)) {
             $this->events->removeElement($event);
-            // set the owning side to null (unless already changed)
             if ($event->getContest() === $this) {
                 $event->setContest(null);
             }
