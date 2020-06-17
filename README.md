@@ -38,13 +38,13 @@ $ php bin/console d:m:m -n
 Generate fixtures:
 
 ```bash
-$ php bin/console d:m:m -n
+$ php bin/console d:f:l -n
 ```
 
 Launch the webserver:
 
 ```bash
-$ cd FFE-COMPET-P5-MASTER
+$ cd FFE-COMPET
 $ symfony serve
 ```
 

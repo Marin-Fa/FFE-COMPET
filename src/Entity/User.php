@@ -69,7 +69,7 @@ class User implements UserInterface, \Serializable
     private $horseriders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Horse", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Horse", mappedBy="user", cascade={"persist", "remove"})
      */
     private $horses;
 
