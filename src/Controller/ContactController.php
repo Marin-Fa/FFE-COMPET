@@ -15,7 +15,6 @@ class ContactController extends AbstractController
      */
     public function createAction(Request $request)
     {
-        $user = $this->getUser();
         $contact = new Contact();
         $form = $this->createForm(ContactFormType::class, $contact);
         $form->handleRequest($request);
@@ -30,8 +29,7 @@ class ContactController extends AbstractController
         }
 
         return $this->render('contact/index.html.twig', [
-            'contactForm' => $form->createView(),
-            'user' => $user
+            'contactForm' => $form->createView()
         ]);
     }
 }
